@@ -81,17 +81,17 @@
                 <ul class="navbar-nav align-items-center right-nav-link">
                     <li class="nav-item">
                         <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-toggle="dropdown" href="#">
-                            <span class="user-profile">Kaouthar AHMAMI</span>
+                            <span class="user-profile">{{ user.username }}</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-right">
                             <li class="dropdown-item user-details">
                                 <div class="media">
                                     <div class="media-body">
-                                        <p class="user-subtitle">kaouthar@gmail.com</p>
+                                        <p class="user-subtitle">{{ user.email }}</p>
                                     </div>
                                 </div>
                             </li>
-                            <a href="#"><li class="dropdown-item"><i class="icon-power mr-2"></i> Logout</li></a>
+                            <a href="{{ url('app_logout') }}"><li class="dropdown-item"><i class="icon-power mr-2"></i>Logout</li></a>
                         </ul>
                     </li>
                 </ul>
@@ -162,6 +162,12 @@
 {% endblock body %}
 
 {% block stylesheets %}
+    <style>
+        body {
+            background: rgb(151,255,168);
+            background: linear-gradient(90deg, rgba(151,255,168,1) 0%, rgba(105,230,255,1) 100%);
+        }
+    </style>
     <!-- loader-->
     <link href="{{ asset('css/pace.min.css') }}" rel="stylesheet"/>
     <!-- simplebar CSS-->
