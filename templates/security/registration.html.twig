@@ -1,67 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Registration{% endblock %}
 
 {% block body %}
     <!-- start loader -->
     <div id="pageloader-overlay" class="visible incoming"><div class="loader-wrapper-outer"><div class="loader-wrapper-inner" ><div class="loader"></div></div></div></div>
     <!-- end loader -->
 
-    <div class="loader-wrapper"><div class="lds-ring"><div></div><div></div><div></div><div></div></div></div>
-    <div class="card card-authentication1 mx-auto my-5">
-        <div class="card-body">
-            <div class="card-content p-2">
-                <div class="text-center">
-                    <img src="{{ asset('images/logo/logo-removebg-preview.png') }}"
-                         alt="Allo Ouvrier Logo"
-                         style="height: 10vh; width: auto;">
-                </div>
-                <div class="card-title text-uppercase text-center py-3">Sign In</div>
-                <form action="{{ path('app_login') }}" method="post">
-                    <div class="form-group">
-                        <label for="exampleInputUsername" class="sr-only">Email</label>
-                        <div class="position-relative has-icon-right">
-                            <input type="text"
-                                   id="exampleInputUsername"
-                                   class="form-control input-shadow"
-                                   name="_username"
-                                   placeholder="Enter Email"
-                                   value="{{ last_username }}"
-                                   required autofocus>
-                            <div class="form-control-position">
-                                <i class="icon-user"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputPassword" class="sr-only">Password</label>
-                        <div class="position-relative has-icon-right">
-                            <input type="password"
-                                   id="exampleInputPassword"
-                                   class="form-control input-shadow"
-                                   name="_password"
-                                   placeholder="Enter Password"
-                                   required>
-                            <div class="form-control-position">
-                                <i class="icon-lock"></i>
-                            </div>
-                        </div>
-                    </div>
-                    {% if error %}
-                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                    {% endif %}
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                    <button type="submit" class="btn btn-light btn-block">Sign In</button>
-                </form>
-            </div>
-        </div>
-        <div class="card-footer text-center py-3">
-            <p class="text-warning mb-0">Do not have an account? <a href="{{ url('app_register') }}"> Sign Up here</a></p>
-        </div>
-    </div>
-
     <!-- Start wrapper-->
     <div id="wrapper">
+
+        <div class="card card-authentication1 mx-auto my-4">
+            <div class="card-body">
+                <div class="card-content p-2">
+                    <div class="text-center">
+                        <img src="{{ asset('images/logo/logo-removebg-preview.png') }}"
+                             alt="Allo Ouvrier Logo"
+                             style="height: 10vh; width: auto;">
+                    </div>
+                    <div class="card-title text-uppercase text-center py-3">Sign Up</div>
+                    {{ form_start(form) }}
+                        <div class="form-group">
+                            <label for="exampleInputName" class="sr-only">Username</label>
+                            <div class="position-relative has-icon-right">
+                                {{ form_row(form.username) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmailId" class="sr-only">Email</label>
+                            <div class="position-relative has-icon-right">
+                                {{ form_row(form.email) }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword" class="sr-only">Password</label>
+                            <div class="position-relative has-icon-right">
+                                {{ form_row(form.password) }}
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-light btn-block waves-effect waves-light">Sign Up</button>
+
+                    {{ form_end(form) }}
+                </div>
+            </div>
+            <div class="card-footer text-center py-3">
+                <p class="text-warning mb-0">Already have an account? <a href="{{ url('app_login') }}"> Sign In here</a></p>
+            </div>
+        </div>
 
         <!--Start Back To Top Button-->
         <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
