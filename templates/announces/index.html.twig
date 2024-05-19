@@ -1,0 +1,31 @@
+{% extends 'site.html.twig' %}
+
+{% block title %}Announces{% endblock %}
+
+{% block content %}
+    <div class="clearfix"></div>
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row mt-3">
+                <div class="d-flex flex-wrap justify-content-center">
+                    {% for announce in announces %}
+                        <div class="card profile-card-2 m-3" style="width: 500px">
+                            <div class="card-body pt-5 d-flex flex-wrap justify-content-between align-items-start">
+                                <h5 class="card-title">{{ announce.title }}</h5>
+                                <hr class="w-100 my-3">
+                                <p class="card-text">{{ announce.description }}</p>
+                                <hr class="w-100 my-3">
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-light btn-round px-5">Show more</button>
+                                    <button type="button" class="btn btn-light btn-round px-5">Send Message</button>
+                                </div>
+                                <p class="card-text align-self-end">{{ announce.createdAt | date('d-m-Y H:i:s') }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
