@@ -9,21 +9,23 @@
         <div class="container-fluid">
             <div class="row mt-3 justify-content-center">
                 {% for announce in announces %}
-                    {% if announce.client != user and announce.status == true %}
                         <div class="col-12 col-md-6 col-lg-6 d-flex">
-                            <div class="card profile-card-2 m-3 w-100">
+                            <div class="card profile-card-2 w-100">
                                 <div class="card-body pt-5 d-flex flex-column">
-                                    <h2 class="card-title text-center"
-                                        style="font-size: 1.5rem;">{{ announce.client.username }}</h2>
-                                    <hr class="w-100 my-3">
                                     <h5 class="card-title">{{ announce.title }}</h5>
                                     <hr class="w-100 my-3">
                                     <p class="card-text">{{ announce.description }}</p>
                                     <hr class="w-100 my-3">
-                                    <div class="form-group text-nowrap d-flex justify-content-start">
-                                        <a href="{{ url('app_announces_show', { 'id': announce.id }) }}"><button type="button" class="m-3 btn btn-info btn-round px-5">Show more</button></a>
-                                        <button type="button" class="m-3 btn btn-warning btn-round px-5">Send Message
-                                        </button>
+                                    <div class="form-group text-nowrap d-flex justify-content-center">
+                                        <a href="#">
+                                            <button type="button" class="m-3 btn btn-info btn-round px-5">Edit</button>
+                                        </a>
+                                        <a href="{{ url('app_announces_edit_status', { 'id': announce.id }) }}">
+                                            <button type="button" class="m-3 btn btn-warning btn-round px-5">change the status</button>
+                                        </a>
+                                        <a href="#">
+                                            <button type="button" class="m-3 btn btn-danger btn-round px-5">Delete</button>
+                                        </a>
                                     </div>
                                     <hr class="w-100 my-3">
                                     <div class="card-content">
@@ -45,11 +47,11 @@
                                     <hr class="w-100 my-3">
                                     <div class="form-group text-nowrap d-flex justify-content-between">
                                         <p class="card-text mt-3 m-3">{{ announce.createdAt | date('d-m-Y H:i') }}</p>
+                                        <p class="card-text mt-3 m-3">{% if announce.status %}online{% else %}offline{% endif %}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    {% endif %}
                 {% endfor %}
             </div>
         </div>

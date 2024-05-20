@@ -26,6 +26,7 @@ class AnnouncesType extends AbstractType
                     'placeholder' => "Description"],
             ])
             ->add('status', CheckboxType::class, [
+                'required' => false,
                 'label' => 'Online ?',
                 'attr' => ['class' => 'form-control form-control-rounded',
                     'id' => 'input-6'],

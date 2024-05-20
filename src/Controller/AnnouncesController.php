@@ -26,6 +26,17 @@ class AnnouncesController extends AbstractController
         ]);
     }
 
+    #[Route('/announces/me', name: 'app_announces_me')]
+    public function mine(AnnouncesRepository $announcesRepository): Response
+    {
+        $announces = $announcesRepository->findBy(['client' => $this->getUser()]);
+
+        return $this->render('announces/mine.html.twig', [
+            'user' => $this->getUser(),
+            'announces' => $announces,
+        ]);
+    }
+
     #[Route('/announces/add', name: 'app_announces_add')]
     public function add(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -60,5 +71,20 @@ class AnnouncesController extends AbstractController
             'user' => $this->getUser(),
             'announce' => $announce,
         ]);
+    }
+
+    #[Route('/announces/changeStatus/{id}', name: 'app_announces_edit_status')]
+    public function changeStatus(Announces $announces, EntityManagerInterface $entityManager): Response
+    {
+        if ($announces->getStatus() == "1") {
+            $announces->setStatus("0");
+        } else {
+            $announces->setStatus("1");
+        }
+
+        $entityManager->persist($announces);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_announces_me');
     }
 }
