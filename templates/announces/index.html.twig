@@ -7,24 +7,50 @@
 
     <div class="content-wrapper">
         <div class="container-fluid">
-            <div class="row mt-3">
-                <div class="d-flex flex-wrap justify-content-center">
-                    {% for announce in announces %}
-                        <div class="card profile-card-2 m-3" style="width: 500px">
-                            <div class="card-body pt-5 d-flex flex-wrap justify-content-between align-items-start">
-                                <h5 class="card-title">{{ announce.title }}</h5>
-                                <hr class="w-100 my-3">
-                                <p class="card-text">{{ announce.description }}</p>
-                                <hr class="w-100 my-3">
-                                <div class="form-group">
-                                    <button type="button" class="btn btn-light btn-round px-5">Show more</button>
-                                    <button type="button" class="btn btn-light btn-round px-5">Send Message</button>
+            <div class="row mt-3 justify-content-center">
+                {% for announce in announces %}
+                    {% if announce.status == true %}
+                        <div class="col-12 col-md-6 col-lg-6 d-flex">
+                            <div class="card profile-card-2 m-3 w-100">
+                                <div class="card-body pt-5 d-flex flex-column">
+                                    <h2 class="card-title text-center"
+                                        style="font-size: 1.5rem;">{{ announce.client.username }}</h2>
+                                    <hr class="w-100 my-3">
+                                    <h5 class="card-title">{{ announce.title }}</h5>
+                                    <hr class="w-100 my-3">
+                                    <p class="card-text">{{ announce.description }}</p>
+                                    <hr class="w-100 my-3">
+                                    <div class="form-group text-nowrap d-flex justify-content-start">
+                                        <a href="{{ url('app_announces_show', { 'id': announce.id }) }}"><button type="button" class="m-3 btn btn-info btn-round px-5">Show more</button></a>
+                                        <button type="button" class="m-3 btn btn-warning btn-round px-5">Send Message
+                                        </button>
+                                    </div>
+                                    <hr class="w-100 my-3">
+                                    <div class="card-content">
+                                        <div class="row row-group m-0">
+                                            <div class="col-6 border-light">
+                                                <div class="card-body">
+                                                    <h5 class="text-white mb-0">{{ announce.sells }}<span class="float-right"><i
+                                                                    class="fa fa-shopping-cart"></i></span></h5>
+                                                </div>
+                                            </div>
+                                            <div class="col-6 border-light">
+                                                <div class="card-body">
+                                                    <h5 class="text-white mb-0">{{ announce.views }}<span class="float-right"><i
+                                                                    class="fa fa-eye"></i></span></h5>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr class="w-100 my-3">
+                                    <div class="form-group text-nowrap d-flex justify-content-between">
+                                        <p class="card-text mt-3 m-3">{{ announce.createdAt | date('d-m-Y H:i') }}</p>
+                                    </div>
                                 </div>
-                                <p class="card-text align-self-end">{{ announce.createdAt | date('d-m-Y H:i:s') }}</p>
                             </div>
                         </div>
-                    {% endfor %}
-                </div>
+                    {% endif %}
+                {% endfor %}
             </div>
         </div>
     </div>

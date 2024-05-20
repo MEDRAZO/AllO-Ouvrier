@@ -38,6 +38,12 @@ class Announces
     #[ORM\OneToMany(targetEntity: Comments::class, mappedBy: 'announces', orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column]
+    private ?int $views = null;
+
+    #[ORM\Column]
+    private ?int $sells = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -134,6 +140,30 @@ class Announces
                 $comment->setAnnounces(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getViews(): ?int
+    {
+        return $this->views;
+    }
+
+    public function setViews(int $views): static
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    public function getSells(): ?int
+    {
+        return $this->sells;
+    }
+
+    public function setSells(int $sells): static
+    {
+        $this->sells = $sells;
 
         return $this;
     }

@@ -50,8 +50,10 @@ final class AnnouncesFactory extends ModelFactory
         return [
             'created_at' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'description' => self::faker()->paragraph(),
-            'status' => self::faker()->randomElement(['online', 'offline']),
+            'status' => self::faker()->randomElement(['1', '0']),
             'title' => self::faker()->name(),
+            'views' => self::faker()->randomNumber(),
+            'sells' => self::faker()->randomNumber(),
         ];
     }
 
